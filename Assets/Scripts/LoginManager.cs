@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,13 +17,14 @@ using static Axios;
 public class LoginManager : MonoBehaviour
 {
     public TMP_InputField[] inputFields;
-    public TMP_Text[] resultFields;
+    public TMP_Text hintMessage;
     public Button button;
 
     private Axios axios;
     // Start is called before the first frame update
     void Start()
     {
+
         axios = new Axios();
         button.onClick.AddListener(onSubmit);        
     }
@@ -44,12 +46,15 @@ public class LoginManager : MonoBehaviour
         refreshToken = refreshToken.Split("; ")[0]  + ";";
         TokenManager.SetToken("refreshToken",refreshToken);
         TokenManager.SetToken("accessToken",TokenInfo.CreateFromJSON(www.downloadHandler.text).accessToken);
+        hintMessage.text = "로그인 성공!";
         SceneManager.LoadScene("MainScene");
+
     }
 
 
     void onError(string error){
         Debug.LogError(error);
+        hintMessage.text = "로그인 실패!";
     }
 
 

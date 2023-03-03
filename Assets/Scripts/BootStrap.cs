@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
+
 
 using static Axios;
 using static TokenManager;
@@ -22,7 +24,7 @@ public class BootStrap : MonoBehaviour
     }
 
     void onSuccess(UnityWebRequest www){
-        
+        SceneManager.LoadScene("MainScene");
     }
 
     void onError(string error){
