@@ -8,12 +8,11 @@ using Debug = UnityEngine.Debug;
 
 public class TMap : GpsProvider
 {
-
     private readonly string appKey = "l7xxbefea111d09640dab1bf5fec3a669c50";
     private string apiUrl = "https://apis.openapi.sk.com/tmap/staticMap?version=1&appKey={0}&coordType=WGS84GEO&width=512&height=512&zoom=14&format=PNG&longitude={1}&latitude={2}&markers={1}%2C{2}";
     public RawImage mapImage;
 
-// API 호출 함수
+    // API 호출 함수
     IEnumerator CallApi()
     {
         // API 호출 URL 생성

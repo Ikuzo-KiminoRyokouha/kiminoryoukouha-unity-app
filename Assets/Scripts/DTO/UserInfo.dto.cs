@@ -1,4 +1,6 @@
 using UnityEngine;
+using Network;
+
 
 [System.Serializable]
 public class UsersInfo{

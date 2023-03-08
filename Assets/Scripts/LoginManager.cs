@@ -8,11 +8,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Debug = UnityEngine.Debug;
-
-using static TokenInfo;
-using static TokenManager;
-using static CustomConstraint;
-using static Axios;
+using Network;
 
 public class LoginManager : MonoBehaviour
 {
@@ -30,6 +26,7 @@ public class LoginManager : MonoBehaviour
     }
 
     void onSubmit(){
+        Debug.Log("Submit Button is clicked");
         WWWForm form = new WWWForm();
         for (int i = 0; i < inputFields.Length; i++)
         {

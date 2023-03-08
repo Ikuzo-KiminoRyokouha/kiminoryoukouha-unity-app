@@ -4,30 +4,30 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
+namespace Network {
+    public class BootStrap : MonoBehaviour
+    {
+        private Axios axios;
 
-using static Axios;
-using static TokenManager;
+        // Start is called before the first frame update
+        void Start(){
+            axios = new Axios();
+            StartCoroutine(axios.Get("/users", onSuccess, onError,true));
+        }
 
-public class BootStrap : MonoBehaviour
-{
-    private Axios axios;
+        // Update is called once per frame
+        void Update(){
+            
+        }
 
-    // Start is called before the first frame update
-    void Start(){
-        axios = new Axios();
-        StartCoroutine(axios.Get("/users", onSuccess, onError,true));
+        void onSuccess(UnityWebRequest www){
+            SceneManager.LoadScene("MainScene");
+        }
+
+        void onError(string error){
+
+        }
     }
 
-    // Update is called once per frame
-    void Update(){
-        
-    }
-
-    void onSuccess(UnityWebRequest www){
-        SceneManager.LoadScene("MainScene");
-    }
-
-    void onError(string error){
-
-    }
 }
+
