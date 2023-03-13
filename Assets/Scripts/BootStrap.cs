@@ -14,8 +14,8 @@ namespace Network
         void Start()
         {
             WWWForm form = new WWWForm();
-            form.AddField("email", "tim1@naver.com");
-            form.AddField("password", "12345");
+            form.AddField("email", "right7066@naver.com");
+            form.AddField("password", "1234");
             axios = new Axios();
             StartCoroutine(axios.Post("/auth/signin", form, onSuccess, onError));
             // StartCoroutine(axios.Get("/users", onSuccess, onError, true));
