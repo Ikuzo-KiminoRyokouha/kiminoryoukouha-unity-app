@@ -8,7 +8,7 @@ using Debug = UnityEngine.Debug;
 
 namespace HandTracking
 {
-
+    // 살.... 려.... 줘...
     public class HandTrackingBootStrap : MonoBehaviour
     {
         // 오른쪽 손인지 왼쪽 손인지에 대한 값이 들어감

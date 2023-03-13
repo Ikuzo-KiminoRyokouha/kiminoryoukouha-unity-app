@@ -44,7 +44,7 @@ namespace UI.Button
                 button.transform.localPosition = new Vector3(0, 0.003f, 0);
                 isPressed = true;
                 onClick();
-                Invoke("OnTriggerExit", 0.3f);
+                Invoke("OnTriggerExit", 0.1f);
             }
         }
 
