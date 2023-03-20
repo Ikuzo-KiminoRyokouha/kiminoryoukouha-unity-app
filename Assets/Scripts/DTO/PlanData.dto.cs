@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System;
+
 namespace DataTypes
 {
 
@@ -14,8 +16,8 @@ namespace DataTypes
         public int id;
         public string title;
         public PlanTag tag;
-        public string start;
-        public string end;
+        public DateTime start;
+        public DateTime end;
         public string city;
         public int totalCost;
         public PlanTravel[] travels;

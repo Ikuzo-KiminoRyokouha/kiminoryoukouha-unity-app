@@ -12,12 +12,8 @@ public class NRInputTest : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("axios instance is initialized");
         axios = new Axios();
-        Debug.Log("axios instance is initializing");
-        Debug.Log("Coroutine Start ");
         StartCoroutine(axios.Get("/users", onSuccess, onError, true));
-        Debug.Log("Coroutine End ");
     }
 
     // Update is called once per frame

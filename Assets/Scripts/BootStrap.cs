@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using NRKernal;
 
 namespace Network
 {
@@ -33,7 +34,11 @@ namespace Network
             refreshToken = refreshToken.Split("; ")[0] + ";";
             TokenManager.SetToken("refreshToken", refreshToken);
             TokenManager.SetToken("accessToken", TokenInfo.CreateFromJSON(www.downloadHandler.text).accessToken);
-            SceneManager.LoadScene("MainScene");
+            if (NRInput.SetInputSource(InputSourceEnum.Hands))
+            {
+                SceneManager.LoadScene("MainScene");
+            }
+
         }
 
         void onError(string error)

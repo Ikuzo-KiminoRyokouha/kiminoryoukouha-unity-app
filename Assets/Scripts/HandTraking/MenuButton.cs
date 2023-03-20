@@ -21,7 +21,7 @@ namespace UI.Button
             }
             set
             {
-                // buttonObject.SetActive(!value);
+                buttonObject.SetActive(!value);
                 menuObject.SetActive(value);
                 currentStatus = value;
             }
