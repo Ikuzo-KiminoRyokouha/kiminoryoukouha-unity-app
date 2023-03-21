@@ -14,11 +14,19 @@ namespace Network
 
         public delegate void OnSuccess(UnityWebRequest www);
         public delegate void OnError(string error);
+        public string BASE_URL = URL.BASE;
+        public Axios()
+        {
+        }
+        public Axios(string baseURL)
+        {
+            BASE_URL = baseURL;
+        }
 
         public IEnumerator Get(string path, OnSuccess onSuccess, OnError onError, bool needAuth = false)
         {
-
-            UnityWebRequest www = UnityWebRequest.Get(URL.BASE + path);
+            Debug.Log(BASE_URL + path);
+            UnityWebRequest www = UnityWebRequest.Get(BASE_URL + path);
 
             if (needAuth)
             {
@@ -44,7 +52,7 @@ namespace Network
         public IEnumerator Post(string path, WWWForm body, OnSuccess onSuccess, OnError onError, bool needAuth = false)
         {
 
-            UnityWebRequest www = UnityWebRequest.Post(URL.BASE + path, body);
+            UnityWebRequest www = UnityWebRequest.Post(BASE_URL + path, body);
 
             if (needAuth)
             {
@@ -68,7 +76,7 @@ namespace Network
 
         private IEnumerator RequestRefreshToken(OnSuccess onSuccess, OnError onError)
         {
-            UnityWebRequest www = UnityWebRequest.Get(URL.BASE + "/auth/token/refresh");
+            UnityWebRequest www = UnityWebRequest.Get(BASE_URL + "/auth/token/refresh");
 
             www.SetRequestHeader("Cookie", TokenManager.GetToken("refreshToken"));
 
