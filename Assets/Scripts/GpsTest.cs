@@ -8,7 +8,7 @@ using static LatLng;
 using Debug = UnityEngine.Debug;
 using GPS;
 
-public class GpsTest : GpsProvider
+public class GpsTest : GpsProviderDep
 {
     public GameObject prefab;
     public IEnumerator gpsCoRoutine;
