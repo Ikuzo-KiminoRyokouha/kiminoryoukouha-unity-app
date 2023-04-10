@@ -17,9 +17,9 @@ public class ConfirmBehaviour : MonoBehaviour
     void Awake()
     {
         PlaneDetector = GameObject.Find("PlaneDetector");
-        Reticle = GameObject.Find("Reticle");
-        Destroy(PlaneDetector);
-        Destroy(Reticle);
+        Reticle = GameObject.Find("Reticle Prefab");
+        PlaneDetector.SetActive(false);
+        Reticle.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -49,8 +49,8 @@ public class ConfirmBehaviour : MonoBehaviour
     // 삭제되기 전에 호출되는 함수
     void OnDestroy()
     {
-        Instantiate(PlaneDetector, new Vector3(0, 0, 0), Quaternion.identity);
-        Instantiate(Reticle, new Vector3(0, 0, 0), Quaternion.identity);
+        PlaneDetector.SetActive(true);
+        Reticle.SetActive(true);
     }
 
     public void onResolve()
