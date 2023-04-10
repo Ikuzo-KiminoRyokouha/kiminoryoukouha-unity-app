@@ -130,6 +130,7 @@ Library: lib_burst_generated
 --root-assembly=A:\unity\ar-test-app\Temp\StagingArea\Data\Managed\Unity.VisualScripting.State.dll
 --root-assembly=A:\unity\ar-test-app\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Core.dll
 --root-assembly=A:\unity\ar-test-app\Temp\StagingArea\Data\Managed\Unity.Burst.dll
+--root-assembly=A:\unity\ar-test-app\Temp\StagingArea\Data\Managed\NRSDK.Experimental.dll
 --root-assembly=A:\unity\ar-test-app\Temp\StagingArea\Data\Managed\Unity.TextMeshPro.dll
 --root-assembly=A:\unity\ar-test-app\Temp\StagingArea\Data\Managed\Unity.Timeline.dll
 --root-assembly=A:\unity\ar-test-app\Temp\StagingArea\Data\Managed\Nobi.UiRoundedCorners.dll
