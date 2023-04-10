@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LoginScene.unity
     guid: 75962f58a346eaf44adacc5da96bb87a
   - enabled: 1
+    path: Assets/Scenes/PlaneDetectScene.unity
+    guid: bb9c2c66c224dc9478c3623bb5614a49
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: e821fef1b0fac214db4ea9e85a54238e
   - enabled: 0
