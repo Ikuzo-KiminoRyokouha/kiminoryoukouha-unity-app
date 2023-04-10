@@ -18,8 +18,8 @@ public class ConfirmBehaviour : MonoBehaviour
     {
         PlaneDetector = GameObject.Find("PlaneDetector");
         Reticle = GameObject.Find("Reticle");
-        Destory(PlaneDetector);
-        Destory(Reticle);
+        Destroy(PlaneDetector);
+        Destroy(Reticle);
     }
 
     // Start is called before the first frame update
