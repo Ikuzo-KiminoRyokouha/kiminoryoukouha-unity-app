@@ -8,6 +8,10 @@ public class FollowCamera : MonoBehaviour
 
     private void Update()
     {
+        if (_cameraTransform == null)
+        {
+            _cameraTransform = GameObject.Find("CenterCamera").transform;
+        }
         Vector3 direction = Vector3.ProjectOnPlane(_cameraTransform.forward, Vector3.up).normalized;
         Vector3 targetPosition = _cameraTransform.position + (direction * _distance);
         Quaternion targetRotation = Quaternion.LookRotation(direction);

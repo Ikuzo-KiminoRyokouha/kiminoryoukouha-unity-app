@@ -1,7 +1,9 @@
-public class LatLng {
-    public float latitude;
-    public float longitude;
-    public LatLng(float latitude, float longitude){
+public class LatLng
+{
+    public double latitude;
+    public double longitude;
+    public LatLng(double latitude, double longitude)
+    {
         this.latitude = latitude;
         this.longitude = longitude;
     }

@@ -13,8 +13,8 @@ public class GpsProvider : MonoBehaviour
     public float resendTime = 1.0f;
 
     //위도 경도 변경
-    public float latitude = 35.947339f;
-    public float longitude = 128.46379f;
+    public double latitude = 35.947339f;
+    public double longitude = 128.46379f;
 
     public string error = "";
     public float accuracy = 0.0f;
@@ -79,8 +79,8 @@ public class GpsProvider : MonoBehaviour
         while (receiveGPS)
         {
             li = Input.location.lastData;
-            latitude = li.latitude;
-            longitude = li.longitude;
+            latitude = li.latitude * 1.0d;
+            longitude = li.longitude * 1.0d;
             accuracy = li.horizontalAccuracy;
 
             yield return new WaitForSeconds(resendTime);

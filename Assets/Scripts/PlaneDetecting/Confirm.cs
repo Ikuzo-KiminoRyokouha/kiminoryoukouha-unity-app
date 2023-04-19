@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Numerics;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using NRKernal;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 using Quaternion = UnityEngine.Quaternion;
+using Debug = UnityEngine.Debug;
 
 public class Confirm : MonoBehaviour
 {
@@ -31,13 +33,20 @@ public class Confirm : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        SceneManager.LoadScene("MainScene");
+
+    }
+
     // Update is called once per frame
     void Update()
     {
         Scene scene = SceneManager.GetActiveScene();
+
         if (scene.name == "PlaneDetectScene")
         {
-            if (WasTapped() && Reticle.CurrentPlane != null)
+            if (ConfirmPrefab != null && WasTapped() && Reticle.CurrentPlane != null)
             {
                 ReticleVector = Reticle.transform.position;
                 Instantiate(ConfirmPrefab, new Vector3(0, 0, 0), Quaternion.identity);
