@@ -35,7 +35,7 @@ public class Confirm : MonoBehaviour
 
     void Start()
     {
-        SceneManager.LoadScene("MainScene");
+        // SceneManager.LoadScene("MainScene");
 
     }
 

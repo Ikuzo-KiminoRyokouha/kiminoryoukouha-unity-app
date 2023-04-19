@@ -1,3 +1,4 @@
+using System.Numerics;
 using System;
 using System.Drawing;
 using System.Diagnostics;
@@ -8,6 +9,9 @@ using UnityEngine;
 using TMPro;
 using Debug = UnityEngine.Debug;
 using Color = UnityEngine.Color;
+using Vector3 = UnityEngine.Vector3;
+using Vector2 = UnityEngine.Vector2;
+using Plane = UnityEngine.Plane;
 using GPS;
 using static LatLng;
 
@@ -19,7 +23,7 @@ public class TestClass : NRTrackableBehaviour
     private float earthRadius = 6378137f;
     private float degreeToRadian = Mathf.PI / 180f;
 
-    private Camera cam;
+    private GameObject cam;
 
     private GameObject alertObject;
 
@@ -38,7 +42,9 @@ public class TestClass : NRTrackableBehaviour
     public TMP_Text longitudeText;
     public TMP_Text accuracyText;
 
-    public GameObject prefab;
+    [SerializeField] private GameObject AlertPrefab;
+
+    private GameObject AlertObject;
 
     public List<GameObject> lineList = new List<GameObject>();
 
@@ -66,10 +72,28 @@ public class TestClass : NRTrackableBehaviour
         // Vector3 realCoord = GeoToWorldPosition(origin, target);
 
 
-        if (minAccuracy > accuracy)
+        // if (minAccuracy > accuracy)
+        // {
+        //     destoryLine();
+        //     renderLine();
+        // }
+        Debug.Log(lineList.Count);
+        if (checkObjectInCamera())
         {
-            destoryLine();
-            renderLine();
+            Debug.Log("Object In Camera");
+            if (AlertObject != null)
+            {
+                Destroy(AlertObject);
+                AlertObject = null;
+            }
+        }
+        else
+        {
+            if (AlertObject == null)
+            {
+                AlertObject = Instantiate(AlertPrefab);
+            }
+            Debug.Log("Object is out of Camera");
         }
 
 
@@ -77,7 +101,7 @@ public class TestClass : NRTrackableBehaviour
 
         latitudeText.text = latitude.ToString();
         longitudeText.text = longitude.ToString();
-        accuracyText.text = accuracy.ToString();
+        accuracyText.text = checkObjectInCamera().ToString();
         Vector2 originLatLng = new Vector2(128.463775634766f, 35.9473876953125f);
         Vector2 objLatLng = new Vector2(128.463806152344f, 35.9473876953125f);
         Vector3 originCoord = GPSEncoder.GPSToUCS(originLatLng);
@@ -88,32 +112,27 @@ public class TestClass : NRTrackableBehaviour
         Debug.Log(realCoord);
         // latitudeText.text = latitude.ToString();
         // longitudeText.text = longitude.ToString();
+
         // Debug.Log(GPSEncoder.GPSToUCS(latitude, longitude));
         // Debug.Log(GPSEncoder.GPSToUCS(latitude + 0.001f, longitude + 0.001f));
     }
 
     void getCamera()
     {
-        cam = GameObject.Find("CenterCamera").GetComponent<Camera>();
+        cam = GameObject.Find("CenterCamera");
     }
 
-    bool checkObjectInCamera(GameObject obj)
+    bool checkObjectInCamera()
     {
-        Vector3 viewPos = cam.WorldToViewportPoint(obj.transform.position);
-        if (viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1 && viewPos.z > 0)
-        {
-            return true;
-        }
-        return false;
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam.GetComponent<Camera>());
+        bool isVisible = GeometryUtility.TestPlanesAABB(planes, lineList[0].GetComponent<Renderer>().bounds);
+        // Do something if the object is visible
+        return isVisible;
     }
 
     void checkLineInCamera()
     {
 
-        if (checkObjectInCamera(lineList[0]))
-        {
-
-        }
     }
 
 
@@ -138,6 +157,8 @@ public class TestClass : NRTrackableBehaviour
         lr.SetPosition(0, new Vector3(0, 0, 0));
         lr.SetPosition(1, realCoord);
         lr.useWorldSpace = false;
+
+        // GameObject lineInstance = Instantiate(line);
         lineList.Add(line);
     }
 
