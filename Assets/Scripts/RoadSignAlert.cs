@@ -20,6 +20,7 @@ public class RoadSignAlert : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         WorldOverlayImage = GameObject.Find("WorldOverlayImage");
         AlertImage = GameObject.Find("AlertImage");
         AlertImage.GetComponent<RawImage>().texture = texture;

@@ -11,6 +11,8 @@ using Debug = UnityEngine.Debug;
 using Color = UnityEngine.Color;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
+using Quaternion = UnityEngine.Quaternion;
+
 using Plane = UnityEngine.Plane;
 using GPS;
 using static LatLng;
@@ -43,10 +45,13 @@ public class TestClass : NRTrackableBehaviour
     public TMP_Text accuracyText;
 
     [SerializeField] private GameObject AlertPrefab;
+    [SerializeField] private GameObject ModelPrefab;
 
     private GameObject AlertObject;
 
     public List<GameObject> lineList = new List<GameObject>();
+
+    public List<GameObject> modelList = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -138,14 +143,13 @@ public class TestClass : NRTrackableBehaviour
 
     void renderLine()
     {
+        Vector3 stanCoord = new Vector3(0, 0, 0);
+        if (lineList.Count != 0)
+        {
+            stanCoord = lineList[lineList.Count - 1].GetComponent<LineRenderer>().GetPosition(1);
+        }
+
         GameObject line = new GameObject();
-        // Vector2 originLatLng = new Vector2(128.463806152344f, 35.9472999572754f);
-        // Vector2 objLatLng = new Vector2(128.463806152344f, 35.9473876953125f);
-        // Vector3 originCoord = GPSEncoder.GPSToUCS(originLatLng);
-        // Vector3 objCoord = GPSEncoder.GPSToUCS(objLatLng);
-        // // Vector3 originCoord = GPSEncoder.GPSToUCS(128.4638f, 35.94738f);
-        // // Vector3 objCoord = GPSEncoder.GPSToUCS(128.4638f, 35.9474f);
-        // Vector3 realCoord = originCoord - objCoord;
         LatLng origin = new LatLng(128.463806152344d, 35.9472999572754d);
         LatLng target = new LatLng(128.463806152344d, 35.9473876953125d);
         Vector3 realCoord = GeoToWorldPosition(origin, target);
@@ -154,12 +158,28 @@ public class TestClass : NRTrackableBehaviour
         LineRenderer lr = line.GetComponent<LineRenderer>();
         lr.SetWidth(0.1f, 0.1f);
         lr.SetColors(Color.black, Color.black);
-        lr.SetPosition(0, new Vector3(0, 0, 0));
-        lr.SetPosition(1, realCoord);
+        lr.SetPosition(0, stanCoord);
+        lr.SetPosition(1, realCoord + stanCoord);
         lr.useWorldSpace = false;
+
 
         // GameObject lineInstance = Instantiate(line);
         lineList.Add(line);
+        renderModel(lr);
+    }
+
+    void renderModel(LineRenderer lr)
+    {
+        Vector3 destCoord = lr.GetPosition(1);
+        Vector3 originCoord = lr.GetPosition(0);
+        destCoord.y = -1;
+        float x = destCoord.x - originCoord.x;
+        float z = destCoord.z - originCoord.z;
+        float degree = Mathf.Atan2(z, x) * Mathf.Rad2Deg;
+        Debug.Log(degree);
+        GameObject model = Instantiate(ModelPrefab, destCoord, Quaternion.identity);
+        model.transform.Find("Body Basemesh").gameObject.transform.rotation = Quaternion.Euler(new Vector3(-90, degree, 0));
+        modelList.Add(model);
     }
 
     void destoryLine()
