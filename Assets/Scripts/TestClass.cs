@@ -12,6 +12,8 @@ using Color = UnityEngine.Color;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
 using Quaternion = UnityEngine.Quaternion;
+using UnityEditor;
+using static LineBehaviour;
 
 using Plane = UnityEngine.Plane;
 using GPS;
@@ -106,7 +108,7 @@ public class TestClass : NRTrackableBehaviour
 
         latitudeText.text = latitude.ToString();
         longitudeText.text = longitude.ToString();
-        accuracyText.text = checkObjectInCamera().ToString();
+        accuracyText.text = accuracy.ToString();
         Vector2 originLatLng = new Vector2(128.463775634766f, 35.9473876953125f);
         Vector2 objLatLng = new Vector2(128.463806152344f, 35.9473876953125f);
         Vector3 originCoord = GPSEncoder.GPSToUCS(originLatLng);
@@ -156,11 +158,17 @@ public class TestClass : NRTrackableBehaviour
         line.transform.position = new Vector3(0, -1, 0);
         line.AddComponent<LineRenderer>();
         LineRenderer lr = line.GetComponent<LineRenderer>();
-        lr.SetWidth(0.1f, 0.1f);
-        lr.SetColors(Color.black, Color.black);
+        Material arrowMat = Resources.Load<Material>("Materials/Arrow");
+        lr.material = arrowMat;
+        Debug.Log("line renderer Mat : " + lr.material);
+        lr.startWidth = 0.1f;
+        lr.endWidth = 0.1f;
+        lr.startColor = Color.white;
+        lr.endColor = Color.white;
         lr.SetPosition(0, stanCoord);
         lr.SetPosition(1, realCoord + stanCoord);
         lr.useWorldSpace = false;
+        line.AddComponent<LineBehaviour>();
 
 
         // GameObject lineInstance = Instantiate(line);
@@ -176,7 +184,6 @@ public class TestClass : NRTrackableBehaviour
         float x = destCoord.x - originCoord.x;
         float z = destCoord.z - originCoord.z;
         float degree = Mathf.Atan2(z, x) * Mathf.Rad2Deg;
-        Debug.Log(degree);
         GameObject model = Instantiate(ModelPrefab, destCoord, Quaternion.identity);
         model.transform.Find("Body Basemesh").gameObject.transform.rotation = Quaternion.Euler(new Vector3(-90, degree, 0));
         modelList.Add(model);

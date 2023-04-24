@@ -22,16 +22,27 @@ namespace Network
         {
             BASE_URL = baseURL;
         }
-
-        public IEnumerator Get(string path, OnSuccess onSuccess, OnError onError, bool needAuth = false)
+#nullable enable
+        public IEnumerator Get(string path, OnSuccess onSuccess, OnError onError, bool? needAuth = false, Dictionary<string, string>? headers = null)
         {
             Debug.Log(BASE_URL + path);
             UnityWebRequest www = UnityWebRequest.Get(BASE_URL + path);
-
-            if (needAuth)
+            if (needAuth != null)
             {
-                Debug.Log("Authorization" + "Bearer " + TokenManager.GetToken("accessToken"));
-                www.SetRequestHeader("Authorization", "Bearer " + TokenManager.GetToken("accessToken"));
+                if ((bool)needAuth)
+                {
+                    Debug.Log("Authorization" + "Bearer " + TokenManager.GetToken("accessToken"));
+                    www.SetRequestHeader("Authorization", "Bearer " + TokenManager.GetToken("accessToken"));
+                }
+            }
+
+
+            if (headers != null)
+            {
+                foreach (KeyValuePair<string, string> item in headers)
+                {
+                    www.SetRequestHeader(item.Key, item.Value);
+                }
             }
 
             yield return www.SendWebRequest();
@@ -47,16 +58,28 @@ namespace Network
                 yield break;
             }
             onSuccess(www);
+            www.Dispose();
         }
 
-        public IEnumerator Post(string path, WWWForm body, OnSuccess onSuccess, OnError onError, bool needAuth = false)
+        public IEnumerator Post(string path, WWWForm body, OnSuccess onSuccess, OnError onError, bool? needAuth = false, Dictionary<string, string>? headers = null)
         {
 
             UnityWebRequest www = UnityWebRequest.Post(BASE_URL + path, body);
-
-            if (needAuth)
+            if (needAuth != null)
             {
-                www.SetRequestHeader("Authorization", "Bearer " + TokenManager.GetToken("accessToken"));
+                if ((bool)needAuth)
+                {
+                    www.SetRequestHeader("Authorization", "Bearer " + TokenManager.GetToken("accessToken"));
+                }
+            }
+
+
+            if (headers != null)
+            {
+                foreach (KeyValuePair<string, string> item in headers)
+                {
+                    www.SetRequestHeader(item.Key, item.Value);
+                }
             }
 
             yield return www.SendWebRequest();
@@ -72,6 +95,7 @@ namespace Network
                 yield break;
             }
             onSuccess(www);
+            www.Dispose();
         }
 
         private IEnumerator RequestRefreshToken(OnSuccess onSuccess, OnError onError)

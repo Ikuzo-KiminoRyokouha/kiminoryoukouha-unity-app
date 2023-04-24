@@ -36,7 +36,7 @@ public class LoginManager : MonoBehaviour
             string key = inputFields[index].name.ToLower();
             form.AddField(key, text);
         }
-        StartCoroutine(axios.Post("/auth/signin", form, onSuccess, onError));
+        StartCoroutine(axios.Post("/auth/signin", form, onSuccess, onError, false));
     }
 
     void onSuccess(UnityWebRequest www)
