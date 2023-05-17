@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 840400326564540589}
   - component: {fileID: 840400326564540578}
-  - component: {fileID: 840400326564540579}
+  - component: {fileID: 2014954152771125749}
   m_Layer: 0
   m_Name: AlertPrefab
   m_TagString: Untagged
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 41d5f7460c2f356498f588b84d4aaa2c, type: 3}
---- !u!114 &840400326564540579
+--- !u!114 &2014954152771125749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,9 +230,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 840400326564540588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcb34b9d66d7b4a4ca064703c60d7099, type: 3}
+  m_Script: {fileID: 11500000, guid: a3c7906c48f0cd94393196c6c9f7cab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraTransform: {fileID: 0}
-  _speed: 2
-  _distance: 1
+  Anchor: 4
+  FollowSpeed: 100
+  Offset: {x: 0.1, y: 0.05}

@@ -12,7 +12,6 @@ using Debug = UnityEngine.Debug;
 public class LoadNavigateData : MonoBehaviour
 {
     public WalkRoute routes;
-
     public string startX;
     public string startY;
     public string endX;
@@ -21,6 +20,7 @@ public class LoadNavigateData : MonoBehaviour
     public string endName;
     public string searchOption;
     public bool IsTest = false;
+    public double[] pointCoord;
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +32,8 @@ public class LoadNavigateData : MonoBehaviour
         form.AddField("startY", "35.945906");
         form.AddField("endX", "128.4639955");
         form.AddField("endY", "35.9473421");
-        form.AddField("startName", "hi");
-        form.AddField("endName", "fuck");
+        form.AddField("startName", "영전진문대학교 글로벌 생활관");
+        form.AddField("endName", "영진전문대학교 글로벌 캠퍼스");
         form.AddField("searchOption", 10);
         // form.AddField("sort", "custom");
         Debug.Log("로그 보내기");
@@ -49,6 +49,7 @@ public class LoadNavigateData : MonoBehaviour
 
     private void onSuccess(UnityWebRequest www)
     {
+        Debug.Log("request success");
         string res = www.downloadHandler.text;
         routes = JsonConvert.DeserializeObject<WalkRoute>(res, Converter.Settings);
     }
