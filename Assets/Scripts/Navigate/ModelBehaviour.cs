@@ -9,6 +9,9 @@ public class ModelBehaviour : MonoBehaviour, IPointerClickHandler
 {
 	private float FloorY = -1.5f;
 	NavigationProvider NavigationProvider;
+
+	[SerializeField] private Transform _cameraTransform;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -21,15 +24,43 @@ public class ModelBehaviour : MonoBehaviour, IPointerClickHandler
 		NavigationProvider = NavigationManager.GetComponent<NavigationProvider>();
 	}
 
+	private Vector3 origin;
+	private bool IsInit = false;
 	// Update is called once per frame
 	void Update()
 	{
-		Vector3 origin = gameObject.transform.position;
-		if (origin.y < FloorY + 0.5f)
+		if (_cameraTransform == null)
 		{
-			gameObject.transform.position = new Vector3(origin.x, origin.y + 0.05f, origin.z);
+			_cameraTransform = GameObject.Find("CenterCamera").transform;
 		}
 
+
+		Vector3 wearerPos = _cameraTransform.position;
+		if (modelInit())
+		{
+			gameObject.transform.position = new Vector3(origin.x, origin.y + wearerPos.y, origin.z);
+		}
+
+	}
+
+	bool modelInit()
+	{
+		Vector3 ori = gameObject.transform.position;
+
+		if (ori.y < FloorY + 0.5f && !IsInit)
+		{
+			gameObject.transform.position = new Vector3(ori.x, ori.y + 0.05f, ori.z);
+			return IsInit;
+		}
+		else
+		{
+			if (!IsInit)
+			{
+				origin = ori;
+				IsInit = true;
+			}
+			return IsInit;
+		}
 	}
 
 	public void OnPointerClick(PointerEventData eventData)

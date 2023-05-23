@@ -6,7 +6,6 @@ using DataTypes;
 using Newtonsoft.Json;
 using System.Linq;
 using UnityEngine.Networking;
-
 public class NavigationProvider : MonoBehaviour
 {
 
