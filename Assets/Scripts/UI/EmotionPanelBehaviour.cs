@@ -12,6 +12,9 @@ public class EmotionPanelBehaviour : MonoBehaviour
 	public string emotion;
 	public Texture2D[] textureArr;
 
+	public bool IsStickyCamera;
+	[SerializeField] private Transform _cameraTransform;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -46,6 +49,14 @@ public class EmotionPanelBehaviour : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (_cameraTransform == null)
+		{
+			_cameraTransform = GameObject.Find("CenterCamera").transform;
+		}
 
+		if (IsStickyCamera && transform.position.y != _cameraTransform.position.y)
+		{
+			transform.position = new Vector3(transform.position.x, _cameraTransform.position.y, transform.position.z);
+		}
 	}
 }

@@ -23,9 +23,12 @@ public class NavigationProvider : MonoBehaviour
 	private bool PrevIsRender = false;
 	private GameObject NavigationStopButton;
 
+	private GameObject NotificationManager;
+
 	// Start is called before the first frame update
 	void Start()
 	{
+		NotificationManager = GameObject.Find("NotificationManager");
 		NavigationStopButton = GameObject.Find("NavigationStopButton");
 		ToggleNavigationStopButtonVisible(false);
 		Confirm Floor = GameObject.Find("ConfirmManager")?.GetComponent<Confirm>();
@@ -40,18 +43,26 @@ public class NavigationProvider : MonoBehaviour
 	{
 		if (IsRender != PrevIsRender && IsRender == true)
 		{
-			RoutesRequest();
-			ToggleNavigationStopButtonVisible(IsRender);
 			PrevIsRender = IsRender;
+			RoutesRequest();
+			OnNotificate("길찾기가 시작되었습니다.");
+			ToggleNavigationStopButtonVisible(IsRender);
 		}
 		else if (IsRender != PrevIsRender && IsRender == false)
 		{
-			destroyNavigateObject();
-			ToggleNavigationStopButtonVisible(IsRender);
 			PrevIsRender = IsRender;
+			destroyNavigateObject();
+			OnNotificate("길찾기가 종료되었습니다.");
+			ToggleNavigationStopButtonVisible(IsRender);
 		}
 	}
 
+	void OnNotificate(string text)
+	{
+		NotificationProvider NotificationProvider = NotificationManager.GetComponent<NotificationProvider>();
+		NotificationProvider.text = text;
+		NotificationProvider.RequestPending = true;
+	}
 	void ToggleNavigationStopButtonVisible(bool visible)
 	{
 		NavigationStopButton.SetActive(visible);
@@ -59,6 +70,7 @@ public class NavigationProvider : MonoBehaviour
 
 	void RoutesRequest()
 	{
+		Debug.Log("how much this function called");
 		Axios axios = new Axios("https://apis.openapi.sk.com/tmap");
 		Dictionary<string, string> headers = new Dictionary<string, string>();
 		WWWForm form = new WWWForm();
@@ -70,7 +82,8 @@ public class NavigationProvider : MonoBehaviour
 		form.AddField("resCoordType", "WGS84GEO");
 		form.AddField("startName", "출발지");
 		form.AddField("endName", "도착지");
-		headers["appKey"] = "l7xxbefea111d09640dab1bf5fec3a669c50";
+		// headers["appKey"] = "l7xxbefea111d09640dab1bf5fec3a669c50";
+		headers["appKey"] = "5iTqFA4zDo1dZYLISgxvV4801EKX0ozN4tL6Uhwr";
 		StartCoroutine(axios.Post("/routes/pedestrian?version=1&format=json&callback=result", form, onSuccess, onError, false, headers));
 	}
 
@@ -238,9 +251,12 @@ public class NavigationProvider : MonoBehaviour
 	}
 	public void goNext()
 	{
+
 		if (order == LineList.Count() - 1)
 		{
-			//끝
+			// order = 0;
+			// //끝
+			// IsRender = false;
 		}
 		LineList[order].SetActive(false);
 		ModelList[order].SetActive(false);

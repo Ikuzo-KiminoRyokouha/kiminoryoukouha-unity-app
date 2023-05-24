@@ -26,12 +26,14 @@ public class EmoticonPanelProvider : MonoBehaviour
 
 	public void renderEmotionPanel()
 	{
+		string[,] testData = new string[6, 2] { { "Laugh", "되게좋다 여기.." }, { "Simuruk", "생각과는 좀 달라..." }, { "Surprise", "여기에 이런곳이 있었구나..!" }, { "Surprise", "비행기가 있는데? ㅋㅋㅋ" }, { "Angry", "아... 학교가기 싫다" }, { "Laugh", "빙글빙글 회전 로타리~" } };
 		for (int i = 0; i < Coordinates.Count; i++)
 		{
 			Vector3 pointVector = GPS.GPSEncoder.GPSToUCS((float)Coordinates[i].y, (float)Coordinates[i].x);
 			GameObject prefab = Instantiate(EmoticonPanelPrefab, pointVector, Quaternion.identity);
-			prefab.GetComponent<EmotionPanelBehaviour>().emotion = "Angry";
-			prefab.GetComponent<EmotionPanelBehaviour>().content = "hi";
+			prefab.GetComponent<EmotionPanelBehaviour>().emotion = testData[i, 0];
+			prefab.GetComponent<EmotionPanelBehaviour>().content = testData[i, 1];
+			prefab.GetComponent<EmotionPanelBehaviour>().IsStickyCamera = true;
 		}
 	}
 }
