@@ -495,7 +495,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD574\uB2F9\uC704\uCE58\uB97C \uBC14\uB2E5\uC73C\uB85C \uC9C0\uC815\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C"
+  m_text: "\u8A72\u5F53\u4F4D\u7F6E\u3092\u5E8A\u3068\u3057\u3066\u6307\u5B9A\u3057\u307E\u3059\u304B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d870f616ec4c05047923e9b7cdf27800, type: 2}
   m_sharedMaterial: {fileID: 1968950776821536822, guid: d870f616ec4c05047923e9b7cdf27800, type: 2}
@@ -522,7 +522,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.5
+  m_fontSize: 25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -806,7 +806,7 @@ RectTransform:
   m_GameObject: {fileID: 7653871046507096184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.996391, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 451152502928131231}
@@ -1141,6 +1141,18 @@ PrefabInstance:
     - target: {fileID: 3336156685092899286, guid: d6e8c420f4c28a446a202c2e53455446, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: onReject
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905082861302720947, guid: d6e8c420f4c28a446a202c2e53455446, type: 3}
+      propertyPath: m_text
+      value: "\u8A72\u5F53\u4F4D\u7F6E\u3092\u5E8A\u3068\u3057\u3066\u6307\u5B9A\u3057\u307E\u3059\u304B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905082861302720947, guid: d6e8c420f4c28a446a202c2e53455446, type: 3}
+      propertyPath: m_fontSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100209815827168737, guid: d6e8c420f4c28a446a202c2e53455446, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.996391
       objectReference: {fileID: 0}
     - target: {fileID: 5468802555832689517, guid: d6e8c420f4c28a446a202c2e53455446, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName

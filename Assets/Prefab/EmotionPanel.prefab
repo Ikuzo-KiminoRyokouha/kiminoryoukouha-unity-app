@@ -302,6 +302,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: b8cbb90c8d8c76148a35acd5b5be8662, type: 3}
   - {fileID: 2800000, guid: 0700db8d3d889ea408e53c6aa6362779, type: 3}
   - {fileID: 2800000, guid: 060fbf68f38115344b0435d2bf89ea0a, type: 3}
+  IsStickyCamera: 0
+  _cameraTransform: {fileID: 0}
 --- !u!1 &8640543104261797349
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +370,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "3WDJ \uD654\uC774\uD305!"
+  m_text: "3WDJ \u30D5\u30A1\u30A4\u30C8!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d870f616ec4c05047923e9b7cdf27800, type: 2}
   m_sharedMaterial: {fileID: 1968950776821536822, guid: d870f616ec4c05047923e9b7cdf27800, type: 2}
@@ -395,10 +397,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 34.5
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0

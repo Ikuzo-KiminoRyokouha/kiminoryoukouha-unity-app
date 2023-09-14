@@ -32,8 +32,8 @@ public class LoadNavigateData : MonoBehaviour
         form.AddField("startY", "35.945906");
         form.AddField("endX", "128.4639955");
         form.AddField("endY", "35.9473421");
-        form.AddField("startName", "영전진문대학교 글로벌 생활관");
-        form.AddField("endName", "영진전문대학교 글로벌 캠퍼스");
+        form.AddField("startName", "ヨンジン専門大学 グローバル 寮");
+        form.AddField("endName", "ヨンジン専門大学 グローバル キャンパス");
         form.AddField("searchOption", 10);
         // form.AddField("sort", "custom");
         Debug.Log("로그 보내기");

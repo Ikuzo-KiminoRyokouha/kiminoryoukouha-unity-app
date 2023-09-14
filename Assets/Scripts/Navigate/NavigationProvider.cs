@@ -45,14 +45,14 @@ public class NavigationProvider : MonoBehaviour
 		{
 			PrevIsRender = IsRender;
 			RoutesRequest();
-			OnNotificate("길찾기가 시작되었습니다.");
+			OnNotificate("道探しが始まりました");
 			ToggleNavigationStopButtonVisible(IsRender);
 		}
 		else if (IsRender != PrevIsRender && IsRender == false)
 		{
 			PrevIsRender = IsRender;
 			destroyNavigateObject();
-			OnNotificate("길찾기가 종료되었습니다.");
+			OnNotificate("道探しが終了しました.");
 			ToggleNavigationStopButtonVisible(IsRender);
 		}
 	}

@@ -51,7 +51,7 @@ public class NavigatorButtonBehaviour : MonoBehaviour
 
 		GpsManager = GameObject.Find("GpsManager");
 		ButtonText = transform.Find("NavigatorButtonText").gameObject.GetComponent<TMP_Text>();
-		ButtonText.text = "길찾기 시작";
+		ButtonText.text = "道探開始";
 		Confirm Floor = GameObject.Find("ConfirmManager")?.GetComponent<Confirm>();
 		if (Floor != null)
 		{
@@ -148,7 +148,7 @@ public class NavigatorButtonBehaviour : MonoBehaviour
 		double longitude = GpsManager.GetComponent<GpsProvider>().longitude;
 
 		gameObject.GetComponent<Image>().color = new Color32(233, 60, 43, 255);
-		ButtonText.text = "길찾기 중지";
+		ButtonText.text = "道探し中止";
 
 		// LatLng origin = new LatLng(latitude, longitude);
 		// LatLng destination = new LatLng(35.9474220, 128.463775);
@@ -165,7 +165,7 @@ public class NavigatorButtonBehaviour : MonoBehaviour
 	private void OnStopNavigate()
 	{
 		gameObject.GetComponent<Image>().color = new Color32(75, 238, 130, 255);
-		ButtonText.text = "길찾기 시작";
+		ButtonText.text = "道探し開始";
 		destroyNavigateObject();
 		IsPendingEffect = true;
 	}

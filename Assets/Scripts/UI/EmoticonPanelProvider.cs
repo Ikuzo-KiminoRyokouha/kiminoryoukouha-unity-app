@@ -26,7 +26,7 @@ public class EmoticonPanelProvider : MonoBehaviour
 
 	public void renderEmotionPanel()
 	{
-		string[,] testData = new string[6, 2] { { "Laugh", "되게좋다 여기.." }, { "Simuruk", "생각과는 좀 달라..." }, { "Surprise", "여기에 이런곳이 있었구나..!" }, { "Surprise", "비행기가 있는데? ㅋㅋㅋ" }, { "Angry", "아... 학교가기 싫다" }, { "Laugh", "빙글빙글 회전 로타리~" } };
+		string[,] testData = new string[6, 2] { { "Laugh", "めちゃいいねここ！.." }, { "Simuruk", "思ったこととは少し違う..." }, { "Surprise", "ここにこんなところが！.!" }, { "Surprise", "飛行機あるやねーか? ㅋㅋㅋ" }, { "Angry", "あ....学校行きたくない" }, { "Laugh", "グルグル回転ロータリー~" } };
 		for (int i = 0; i < Coordinates.Count; i++)
 		{
 			Vector3 pointVector = GPS.GPSEncoder.GPSToUCS((float)Coordinates[i].y, (float)Coordinates[i].x);
