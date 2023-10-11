@@ -6,6 +6,7 @@ using DataTypes;
 using Newtonsoft.Json;
 using System.Linq;
 using UnityEngine.Networking;
+
 public class NavigationProvider : MonoBehaviour
 {
 
@@ -17,6 +18,9 @@ public class NavigationProvider : MonoBehaviour
 
 	private int order = 0;
 	[SerializeField] private GameObject ModelPrefab;
+	[SerializeField] private GameObject ARMapRenderer;
+	[SerializeField] private GameObject ARMapLabel;
+
 
 	public bool IsRender = false;
 
@@ -30,6 +34,8 @@ public class NavigationProvider : MonoBehaviour
 	{
 		NotificationManager = GameObject.Find("NotificationManager");
 		NavigationStopButton = GameObject.Find("NavigationStopButton");
+		// ARMapRenderer = GameObject.Find("ARMapRenderer");
+		// ARMapLabel = GameObject.Find("ARMapLabel");
 		ToggleNavigationStopButtonVisible(false);
 		Confirm Floor = GameObject.Find("ConfirmManager")?.GetComponent<Confirm>();
 		if (Floor != null)
@@ -46,6 +52,8 @@ public class NavigationProvider : MonoBehaviour
 			PrevIsRender = IsRender;
 			RoutesRequest();
 			OnNotificate("道探しが始まりました");
+			GameObject.Find("ARMap").transform.Find("ARMapInfoPannel").gameObject.SetActive(true);
+			GameObject.Find("ARMap").transform.Find("ARPlayer").gameObject.SetActive(true);
 			ToggleNavigationStopButtonVisible(IsRender);
 		}
 		else if (IsRender != PrevIsRender && IsRender == false)
@@ -53,6 +61,7 @@ public class NavigationProvider : MonoBehaviour
 			PrevIsRender = IsRender;
 			destroyNavigateObject();
 			OnNotificate("道探しが終了しました.");
+
 			ToggleNavigationStopButtonVisible(IsRender);
 		}
 	}
@@ -82,14 +91,15 @@ public class NavigationProvider : MonoBehaviour
 		form.AddField("resCoordType", "WGS84GEO");
 		form.AddField("startName", "출발지");
 		form.AddField("endName", "도착지");
-		// headers["appKey"] = "l7xxbefea111d09640dab1bf5fec3a669c50";
-		headers["appKey"] = "5iTqFA4zDo1dZYLISgxvV4801EKX0ozN4tL6Uhwr";
+		headers["appKey"] = "l7xxbefea111d09640dab1bf5fec3a669c50";
+		// headers["appKey"] = "5iTqFA4zDo1dZYLISgxvV4801EKX0ozN4tL6Uhwr";
 		StartCoroutine(axios.Post("/routes/pedestrian?version=1&format=json&callback=result", form, onSuccess, onError, false, headers));
 	}
 
 	private void onSuccess(UnityWebRequest www)
 	{
 		string res = www.downloadHandler.text;
+		Debug.Log("res : " + res);
 		WalkRoute routes = JsonConvert.DeserializeObject<WalkRoute>(res, Converter.Settings);
 		renderRoutesLine(routes);
 	}
@@ -166,6 +176,10 @@ public class NavigationProvider : MonoBehaviour
 			}
 			renderNavigateObjectTest(pointVectorArr[i], pointVectorArr[i + 1], lineName);
 		}
+
+		ARMapLabel.SetActive(true);
+		ARMapRenderer.GetComponent<NavigatorMinimap>().drawMap();
+
 	}
 
 
@@ -230,6 +244,9 @@ public class NavigationProvider : MonoBehaviour
 		// 모델 배열에 있는 게임 오브젝트 다 삭제
 		ModelList.ForEach(Destroy);
 		ModelList.Clear();
+
+		// ARMapRenderer.SetActive(false);
+		ARMapLabel.SetActive(false);
 	}
 
 	void renderModel(LineRenderer lr)

@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class NavigationButtonBehaviour : MonoBehaviour, IPointerClickHandler
 {
-
 	public GameObject NavigationSearchCanvas;
 	public GameObject MenuAnchor;
 	// Start is called before the first frame update

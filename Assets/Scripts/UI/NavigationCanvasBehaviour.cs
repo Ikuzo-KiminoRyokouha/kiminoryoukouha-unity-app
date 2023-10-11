@@ -28,6 +28,8 @@ public class NavigationCanvasBehaviour : MonoBehaviour
 	{
 		NavigationProvider obj = GameObject.Find("NavigationManager").GetComponent<NavigationProvider>();
 		obj.IsRender = true;
+		GameObject.Find("ARMapLabel").SetActive(true);
+
 		cleanUp();
 	}
 

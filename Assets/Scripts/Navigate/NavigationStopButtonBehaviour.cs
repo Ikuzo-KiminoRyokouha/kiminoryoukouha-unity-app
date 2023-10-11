@@ -21,5 +21,8 @@ public class NavigationStopButtonBehaviour : MonoBehaviour
 
 		NavigationProvider obj = GameObject.Find("NavigationManager").GetComponent<NavigationProvider>();
 		obj.IsRender = false;
+		GameObject.Find("ARMapLabel").SetActive(false);
+		GameObject.Find("ARMapInfoPannel").SetActive(false);
+		GameObject.Find("ARPlayer").SetActive(false);
 	}
 }
